@@ -1,8 +1,6 @@
 import {combineReducers} from "redux"
-import {counter} from "./counter.js"
-import {loginDat} from "./login";
+import {user} from "./user"
 
 export const reduce = combineReducers({
-    counter,
-    loginDat
+    user
 })
