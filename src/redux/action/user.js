@@ -1,5 +1,25 @@
-import {ERROR_MSG, REGISTER_SUCCESS,} from "../constant/constant"
+import {ERROR_MSG, REGISTER_SUCCESS,LOGIN_SUCCESS} from "../constant/constant"
 import axios from "axios"
+const loginSuccess=(data)=>{
+    return {
+        type:LOGIN_SUCCESS,payload:data
+    }
+}
+export const login = ({user,pwd})=>{
+    if(!user||!pwd){
+        return errorMsg("用户密码必须输入")
+    }
+    return dispatch=>{
+        axios.post("/user/login",{user,pwd})
+            .then(res=>{
+                if(res.status==200&&res.data.code===0){
+                    dispatch(loginSuccess(res.data.data))
+                }else{
+                    dispatch(errorMsg(res.data.msg))
+                }
+            })
+    }
+}
 const errorMsg= (msg)=>{
     return {
         msg,
