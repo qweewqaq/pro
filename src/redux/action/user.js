@@ -1,4 +1,4 @@
-import {ERROR_MSG, REGISTER_SUCCESS,LOGIN_SUCCESS} from "../constant/constant"
+import {ERROR_MSG, REGISTER_SUCCESS, LOGIN_SUCCESS, LOAD_DATA} from "../constant/constant"
 import axios from "axios"
 const loginSuccess=(data)=>{
     return {
@@ -18,6 +18,11 @@ export const login = ({user,pwd})=>{
                     dispatch(errorMsg(res.data.msg))
                 }
             })
+    }
+}
+export const loadData=(userinfo)=>{
+    return{
+        type:LOAD_DATA,payload:userinfo
     }
 }
 const errorMsg= (msg)=>{

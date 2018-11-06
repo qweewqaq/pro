@@ -1,11 +1,10 @@
-import {ERROR_MSG, LOGIN_SUCCESS, REGISTER_SUCCESS} from "../constant/constant";
+import {ERROR_MSG, LOAD_DATA, LOGIN_SUCCESS, REGISTER_SUCCESS} from "../constant/constant";
 import {getRedirectPat} from "../uti";
 const initState={
     redirectTo:"",
     isAuth:false,
     msg:"",
     user:"",
-    pwd:"",
     type:""
 }
 export const user =(state=initState,action)=>{
@@ -14,6 +13,8 @@ export const user =(state=initState,action)=>{
             return {...state,msg:"",redirectTo:getRedirectPat(action.payload),isAuth:true,...action.payload}
         case LOGIN_SUCCESS:
             return {...state,msg:"",redirectTo:getRedirectPat(action.payload)}
+        case LOAD_DATA:
+            return {...state,...action.payload}
         case ERROR_MSG:
             return {...state,isAuth:false,msg:action.msg}
         default:
