@@ -1,4 +1,4 @@
-import {AUTH_SUCCESS, ERROR_MSG, LOAD_DATA} from "../constant/constant"
+import {AUTH_SUCCESS, ERROR_MSG, LOAD_DATA, LOGOUT} from "../constant/constant"
 import axios from "axios"
 
 export const login = ({user,pwd})=>{
@@ -15,6 +15,9 @@ export const login = ({user,pwd})=>{
                 }
             })
     }
+}
+export const logoutSubmit=()=>{
+    return {type:LOGOUT}
 }
 const authSuccess=(obj)=>{
     const {pwd,...data}=obj

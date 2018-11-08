@@ -8,3 +8,7 @@ export const LOAD_DATA="LOAD_DATA"
 export const AUTH_SUCCESS="AUTH_SUCCESS"
 
 export const USER_LIST ="USER_LIST"
+export const LOGOUT="LOGOUT"
+export const MSG_LIST="MSG_LIST"
+export const MSG_RECV="MSG_RECV"
+export const MSG_READ="MSG_READ"

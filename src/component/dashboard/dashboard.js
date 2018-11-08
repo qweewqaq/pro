@@ -6,9 +6,11 @@ import {Switch,Route} from "react-router-dom"
 import Boss from "../boss/boss"
 import Genius from "../genius/genius"
 import {User} from "../user/user";
-
+import Chat from "../chat/chat"
+import {getMegList,sendMsg,recvMsg} from "../../redux/action/chat";
 @connect(
-    state=>state
+    state=>state,
+    {getMegList,recvMsg}
 )
 class Dashboard extends React.Component{
     render(){
@@ -36,7 +38,7 @@ class Dashboard extends React.Component{
                 text:"消息",
                 icon:"msg",
                 title:"消息列表",
-                component:Boss
+                component:Chat
             },
             {
                 path:"/me",
@@ -60,6 +62,12 @@ class Dashboard extends React.Component{
                 <NavLinkBar data={navList}></NavLinkBar>
             </div>
         )
+    }
+    componentDidMount(){
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMegList()
+            this.props.recvMsg()
+        }
     }
 }
 export default Dashboard
