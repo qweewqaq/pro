@@ -1,22 +1,31 @@
 import React from "react"
-import {List,InputItem,NavBar,Icon} from "antd-mobile"
+import {List,InputItem,NavBar,Icon,Grid} from "antd-mobile"
 import io from "socket.io-client"
 import {connect} from "react-redux"
-import {getMegList,sendMsg,recvMsg} from "../../redux/action/chat";
+import {getMegList,sendMsg,recvMsg,readMsg} from "../../redux/action/chat";
 import {getChatId} from "../../redux/ut";
 
 const socket = io("ws://localhost:9093")
 
 @connect(
     state=>state,
-    {getMegList,sendMsg,recvMsg}
+    {getMegList,sendMsg,recvMsg,readMsg}
 )
 class Chat extends React.Component{
     constructor(props){
         super(props)
-        this.state={text:"",msg:[]}
+        this.state={text:"",msg:[],show:false}
+    }
+    fixrousel(){
+        setTimeout(function () {
+            window.dispatchEvent(new Event("resize"))
+        })
     }
     render(){
+        const emoji="😁 a a a a a a a a a a a a a a a a a a a a a a a a a a a a"
+            .split(" ")
+            .filter(v=>v)
+            .map(v=>({text:v}))
         const userid=this.props.match.params.user
         const users=this.props.chat.users
         const chatid = getChatId(userid,this.props.user._id)
@@ -34,7 +43,7 @@ class Chat extends React.Component{
 
 
                 {chatmsgs.map(v=>{
-                    const avatar= require(`../img/${v.from}.png`)
+                    const avatar= require(`../img/${users[v.from].avatar}.png`)
                     return v.from==userid?(
                         <List key={v._id}>
                             <List.Item
@@ -44,7 +53,7 @@ class Chat extends React.Component{
                         ) :(
                         <List key={v._id}>
                             <List.Item
-                                extra={`<img src=../img/${v.to}.png`}
+                                extra={<img src={avatar}/>}
                                 className="chat-me"
                             >{v.content}</List.Item>
                         </List>
@@ -57,13 +66,33 @@ class Chat extends React.Component{
                                onChange={v=>{
                                    this.setState({text:v})
                                }}
-                               extra={<span onClick={()=>{this.handleSubmit()}}>发送</span>}>
+                               extra={
+                                   <div>
+                                       <span
+                                           style={{marginRight:15}}
+                                           onClick={()=>{
+                                           this.setState({show:!this.state.show})
+                                           this.fixrousel()
+                                           }}
+                                           >😁</span>
+                                       <span onClick={()=>{this.handleSubmit()}}>发送</span>
+                                   </div>}>
                     </InputItem>
                 </List>
+                {this.state.show?<Grid
+                    data={emoji}
+                    columnNum={9}
+                    carouselMaxRow={3}
+                    isCarousel={true} onClick={v=>{
+                        this.setState({text:this.state.text+v.text})
+                }}
+                />:""}
+
             </div>
             </div>
         )
     }
+
     componentDidMount(){
         if(!this.props.chat.chatmsg.length){
             this.props.getMegList()
@@ -71,7 +100,12 @@ class Chat extends React.Component{
         }
 
     }
+    componentWillUnmount(){
+        const to =this.props.match.params.user
+        this.props.readMsg(to)
+    }
     handleSubmit(){
+        console.log(this.state.text)
         const from =this.props.user._id
         const to =this.props.match.params.user
         const msg=this.state.text

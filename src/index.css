@@ -10,10 +10,11 @@
   width: 100%;
   height:auto!important;
 }
-.fixd-header.am-navbar{
+ .am-navbar{
   position: fixed;
   top: 0;
   width: 100%;
+   -webkit-transform: translate3d(0,0,0);
 }
 .page-content{
   padding:45px 5px;
@@ -26,8 +27,14 @@
   text-align: right;
 }
 
+#chat-page .am-grid-icon{
+  display: none;
+}
+#chat-page .am-grid-text{
+  margin-top: 0;
+}
 .stick-footer{
   width: 100%;
-  position: absolute;
-  bottom: 50px;
+  position: fixed;
+  bottom: 0;
 }

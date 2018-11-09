@@ -12,6 +12,7 @@ import GeniusInfo from "./container/geniusinfo/geniusinfo"
 import Dashboard from "./component/dashboard/dashboard"
 import Chat from "./component/chat/chat"
 let store = configureStore()
+import "./redux"
 ReactDom.render(
     <Provider store={store}>
     <BrowserRouter>

@@ -7,6 +7,7 @@ import Boss from "../boss/boss"
 import Genius from "../genius/genius"
 import {User} from "../user/user";
 import Chat from "../chat/chat"
+import Msg from "../msg/msg"
 import {getMegList,sendMsg,recvMsg} from "../../redux/action/chat";
 @connect(
     state=>state,
@@ -38,7 +39,7 @@ class Dashboard extends React.Component{
                 text:"消息",
                 icon:"msg",
                 title:"消息列表",
-                component:Chat
+                component:Msg
             },
             {
                 path:"/me",
@@ -51,7 +52,7 @@ class Dashboard extends React.Component{
         return (
             <div>
                 <NavBar className="fixd-header" mode="dark">{navList.find(v=>v.path==pathname).title}</NavBar>
-                <div style={{marginTop:35}}>
+                <div style={{marginTop:55}}>
                     <Switch>
                         {navList.map(v=>{
                            return <Route key={v.path} path={v.path} component={v.component}/>
