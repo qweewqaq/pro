@@ -11,8 +11,27 @@ import BossInfo from "./container/bossinfo/bossinfo"
 import GeniusInfo from "./container/geniusinfo/geniusinfo"
 import Dashboard from "./component/dashboard/dashboard"
 import Chat from "./component/chat/chat"
+import axios from "axios"
 let store = configureStore()
-import "./redux"
+let obj = {
+    data: [ 'hello', 'world' ],
+    [Symbol.iterator]() {
+        const self = this;
+        let index = 0;
+        return {
+            next() {
+                if (index < self.data.length) {
+                    return {
+                        value: self.data[index++],
+                        done: false
+                    };
+                } else {
+                    return { value: undefined, done: true };
+                }
+            }
+        };
+    }
+};
 ReactDom.render(
     <Provider store={store}>
     <BrowserRouter>
