@@ -1,3 +1,4 @@
+import axios from "axios"
 export function createStore(reducer) {
     let currentState={}
     let currentListeners=[]
@@ -61,4 +62,47 @@ class movea extends move{
     moveTo(){
         super.moveTo()
     }
+}
+function getVal() {
+    return Promise.resolve(axios.get("/user/info"))
+}
+function geta() {
+    throw new Error("a")
+}
+var a
+async function get() {
+    let a = await getVal()
+
+    return a
+}
+console.log(get().then(res=>{
+    console.log(res)
+}).catch(e=>{console.log(e)}))
+
+async function getPro() {
+    let a =await new Promise(resolve => setTimeout(function () {
+        resolve("a")
+    },1000))
+    return a
+}
+getPro().then(res=>{
+    console.log(res)
+})
+console.log(+0===-0)
+function getVa(a) {
+    console.log(arguments)
+}
+getVa()
+
+let o=/([0-9]+[a-zA-Z]+)(-)/
+let p=/a.??/
+let s= 'this is a number 23564-235-22-423'
+
+console.log(s.match(/(.+?)\d+-\d+-\d+-\d+/))
+console.log(RegExp.$1)
+console.log("aaaaa".match(p))
+let t="0000a-"
+console.log(t.match(o))
+if(t.match(o)){
+    console.log(RegExp.$1)
 }
