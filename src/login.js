@@ -14,7 +14,7 @@ import axios from "axios"
 
 class Login extends React.Component{
 
-    componentDidMount(){
+    componentDidMount(){a
         this.props.getUserData()
     }
     render(){
@@ -29,5 +29,8 @@ class Login extends React.Component{
     }
 
 }
+
+666666
+
 6
 export default withRouter(Login)
