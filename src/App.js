@@ -11,7 +11,7 @@ const mapStatetoProps=(state)=>{
         num:state
     }
 }
-const actionCreaters={
+const actionCreaters={aaaaaaaaaaaaa
     add,
     decrease
 }
