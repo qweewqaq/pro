@@ -8,7 +8,7 @@ import {withRouter} from "react-router-dom"
 
 const mapStatetoProps=(state)=>{
     return {
-        num:state
+        num:statea
     }
 }
 const actionCreaters={aaaaaaaaaaaaa
